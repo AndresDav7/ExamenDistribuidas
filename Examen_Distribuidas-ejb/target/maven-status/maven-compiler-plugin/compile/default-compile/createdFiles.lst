@@ -1,0 +1,5 @@
+com\reserva\session\AbstractFacade.class
+com\reserva\entidades\Reserva_.class
+com\reserva\session\ReservaFacadeLocal.class
+com\reserva\entidades\Reserva.class
+com\reserva\session\ReservaFacade.class

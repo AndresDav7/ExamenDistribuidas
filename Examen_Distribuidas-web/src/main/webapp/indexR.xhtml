@@ -1,0 +1,134 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    
+    <f:view contentType="text/html">
+    <h:head>
+        <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>PrimeFaces</title>
+            </f:facet>
+    </h:head>
+    <h:body>
+        
+        <h:form id="formprincipal">
+            
+            <p:panel header="#{reservaManagedBean.reserva.id==null?'INGRESO DE RESERVA':'ACTUALIZAR RESERVA'}"
+                     rendered="#{reservaManagedBean.reserva!=null}">
+                
+                <div align="center">
+                    
+                    <h:panelGrid>
+                        <p:outputLabel value="NOMBRE:"></p:outputLabel>
+                        <p:inputText value="#{reservaManagedBean.reserva.nombre}"
+                                    ></p:inputText>
+                        
+                        <p:outputLabel value="APELLIDO:"></p:outputLabel>
+                        <p:inputText value="#{reservaManagedBean.reserva.apellido}"></p:inputText>
+                        
+                        <p:outputLabel value="CANCHA:"></p:outputLabel>
+                        <p:inputText value="#{reservaManagedBean.reserva.cancha}"></p:inputText>
+                        
+                        <p:outputLabel value="FECHA:"></p:outputLabel>
+                        <p:calendar value="#{reservaManagedBean.reserva.fecha}"></p:calendar>
+                        
+                       
+                        <p:outputLabel value="HORA:"></p:outputLabel>
+                        <p:inputText value="#{reservaManagedBean.reserva.hora}"></p:inputText>
+                        
+                        <p:outputLabel value="DESCRIPCION:"></p:outputLabel>
+                        <p:inputText value="#{reservaManagedBean.reserva.descripcion}"></p:inputText>
+                          
+                    </h:panelGrid>
+                    
+                </div>
+                
+                  <div align="center">
+                            <p:commandButton value="CANCELAR"
+                                             action="#{reservaManagedBean.cancelar()}"
+                                             update="formprincipal">
+                            </p:commandButton>
+
+                            <p:commandButton value="GRABAR"
+                                             action="#{reservaManagedBean.grabar()}"
+                                             update="formprincipal">
+                            </p:commandButton>
+                        </div>
+            
+            
+            </p:panel>
+            
+            <p:panel header="LISTADO DE CANCHAS" rendered="#{reservaManagedBean.reserva==null}">
+                                <div align="center">
+                            <p:commandButton value="INGRESAR"
+                                             action="#{reservaManagedBean.nuevo()}"
+                                             update="formprincipal"
+                                             style="align-items: center">
+                            </p:commandButton>
+                        </div>
+                
+                
+                <p:dataTable id="tablaresrva" value="#{reservaManagedBean.listaReserva}" var="reserva"
+                                     emptyMessage="NO EXISTEN REGISTROS">
+                            <p:column headerText="ID">
+                                <p:outputLabel value="#{reserva.id}"></p:outputLabel>
+                            </p:column>
+                            <p:column headerText="NOMBRE">
+                                <p:outputLabel value="#{reserva.nombre}"></p:outputLabel>
+                            </p:column>
+                    
+                   
+                            
+                            <p:column headerText="APELLIDO">
+                                <p:outputLabel value="#{reserva.apellido}"></p:outputLabel>
+                            </p:column>
+                    
+                    <p:column headerText="CANCHA">
+                        <p:outputLabel value="#{reserva.cancha}"></p:outputLabel>
+                            </p:column>
+                    
+                    <p:column headerText="FECHA">
+                        <p:outputLabel value="#{reserva.fecha}">
+                            <f:convertDateTime pattern="YYYY-MM-dd"></f:convertDateTime>
+                        </p:outputLabel>
+                            </p:column>
+
+                    <p:column headerText="HORA">
+                        <p:outputLabel value="#{reserva.hora}"></p:outputLabel>
+                            </p:column>
+                    
+                    <p:column headerText="DESCRIPCION">
+                        <p:outputLabel value="#{reserva.descripcion}"></p:outputLabel>
+                            </p:column>
+                    
+                            <p:column headerText="EDITAR">
+                                <p:commandButton action="#{reservaManagedBean.seleccionar(reserva)}"
+                                                 update=":formprincipal"
+                                                 icon="ui-icon-check">
+                                </p:commandButton>
+                            </p:column>
+
+                            <p:column headerText="ELIMINAR">
+                                <p:commandButton action="#{reservaManagedBean.eliminar(reserva)}"
+                                                 update=":formprincipal"
+                                                 icon="ui-icon-trash">
+                                </p:commandButton>
+                            </p:column>
+
+                        </p:dataTable>
+                
+                        
+            </p:panel>
+                
+            
+        </h:form>
+        
+    </h:body>
+        </f:view>
+</html>
+
